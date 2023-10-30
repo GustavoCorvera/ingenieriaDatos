@@ -1,0 +1,42 @@
+CREATE TABLE IF NOT EXISTS public.dimaerolinea
+(
+    aerolineakey integer NOT NULL GENERATED ALWAYS AS IDENTITY ( CYCLE INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    aerolinea_codigo character varying COLLATE pg_catalog."default" NOT NULL,
+    aerolinea_nombre character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT dimaerolinea_pkey PRIMARY KEY (aerolineakey)
+)
+
+CREATE TABLE IF NOT EXISTS public.dimfecha
+(
+    fechakey integer,
+    f_fecha character varying COLLATE pg_catalog."default",
+    f_numerodiames integer,
+    f_nombredia character varying COLLATE pg_catalog."default",
+    f_mes integer,
+    f_nombremes character varying COLLATE pg_catalog."default",
+    f_anio integer,
+    f_numerodiaanio integer,
+    f_numerosemana integer,
+    f_cuarto integer
+)
+
+CREATE TABLE IF NOT EXISTS public.fact_flights
+(
+    flights integer,
+    cancelled integer,
+    cancellationcode character varying COLLATE pg_catalog."default",
+    diverted integer,
+    depdel15 integer,
+    arrdel15 integer,
+    depdelayminutes integer,
+    arrdelayminutes integer,
+    carrierdelay integer,
+    weatherdelay integer,
+    nasdelay integer,
+    securitydelay integer,
+    lateaircraftdelay integer,
+    operating_airline character varying COLLATE pg_catalog."default",
+    flightdate character varying COLLATE pg_catalog."default",
+    aerolineakey integer NOT NULL DEFAULT nextval('fact_flights_aerolineakey_seq'::regclass),
+    fechakey integer
+)
