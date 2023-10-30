@@ -1,0 +1,42 @@
+CREATE TABLE IF NOT EXISTS public.dimfecha
+(
+    fechakey INTEGER,
+    f_fecha VARCHAR(255) ENCODE lzo, -- Ajusta el tamaño y el tipo de codificación según tus necesidades
+    f_numerodiames INTEGER,
+    f_nombredia VARCHAR(255) ENCODE lzo,
+    f_mes INTEGER,
+    f_nombremes VARCHAR(255) ENCODE lzo,
+    f_anio INTEGER,
+    f_numerodiaanio INTEGER,
+    f_numerosemana INTEGER,
+    f_cuarto INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS public.dimaerolinea
+(
+    aerolineakey INT IDENTITY(1,1) NOT NULL,
+    aerolinea_codigo VARCHAR(255) NOT NULL,
+    aerolinea_nombre VARCHAR(255) NOT NULL,
+    PRIMARY KEY (aerolineakey)
+);
+
+CREATE TABLE IF NOT EXISTS public.fact_flights
+(
+    flights INT,
+    cancelled INT,
+    cancellationcode VARCHAR(255),
+    diverted INT,
+    depdel15 INT,
+    arrdel15 INT,
+    depdelayminutes INT,
+    arrdelayminutes INT,
+    carrierdelay INT,
+    weatherdelay INT,
+    nasdelay INT,
+    securitydelay INT,
+    lateaircraftdelay INT,
+    operating_airline VARCHAR(255),
+    flightdate VARCHAR(255),
+    aerolineakey INT NOT NULL DEFAULT nextval('fact_flights_aerolineakey_seq'),
+    fechakey INT
+);
